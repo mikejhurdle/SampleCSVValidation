@@ -119,8 +119,8 @@ namespace SampleCSVValidation.AppServices
                 if (format == "TAB")
                 {
                     config.Delimiter = "\t";
-                    config.HasHeaderRecord = false;
                 };
+                config.HasHeaderRecord = false;
                 string fileName = originalFileName;
                 string validPath = Path.Combine(HttpContext.Current.Server.MapPath("~/" + folder), fileName);
 
