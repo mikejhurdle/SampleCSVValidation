@@ -1,0 +1,54 @@
+﻿@using SampleCSVValidation.DTOs;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+<div style="margin-top:3%;">
+    <label>Please select a file to validate</label>
+    <input name="file" type="file" required />
+    <label style="margin-top:1%;">Please select the format of the file</label>
+    <select name="fileSchema" required>
+        <option value="">Select File Format</option>
+        <option value="CSV">Comma Seperated</option>
+        <option value="TAB">Tab Delimited</option>
+    </select> <br />
+    <label style="margin-top:1%;">Please enter the number of columns to be validated against</label>
+    <input name="columnCount" type="number" min="1" required style="width:40px;"/> <br />
+
+    <input type="submit" value="Upload" required />
+
+    @{
+        var result = (ProcessResultDTO)ViewData["Result"];
+    }
+
+    @if (result != null)
+    {
+        <div style="margin-top:5%;">
+            <label style="font-size:23px; font-weight:600;">@result.Message</label><br />
+            <label>Number of valid rows:</label>
+            <label>@result.NumberOfValidRows</label><br />
+            <label>Number of invalid rows:</label>
+            <label>@result.NumberOfInvalidRows</label><br />
+            <a href="@result.OriginalFilePath" download style="margin-top:5%;">View Original File</a><br />
+            @if (result.NumberOfValidRows > 0)
+            {
+                <a href="@result.ValidFilePath" target="_blank" style="margin-top:5%;">View Valid Records</a>
+                <a href="@result.ValidFilePath" download style="margin-left:11%;">Download Valid Records</a><br />
+            }
+            @if (result.NumberOfInvalidRows > 0)
+            {
+                <a href="@result.InvalidFilePath" target="_blank">View Invalid Records</a>
+                <a href="@result.InvalidFilePath" download style="margin-left:10%;">Download Invalid Records</a><br />
+            }
+        </div>
+    }
+
+
+
+</div>
+
+
+} 
