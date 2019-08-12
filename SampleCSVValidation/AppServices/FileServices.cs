@@ -4,6 +4,8 @@ using SampleCSVValidation.DTOs;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 
@@ -153,6 +155,43 @@ namespace SampleCSVValidation.AppServices
                 throw ex;
             }
 
+        }
+
+        public void DoThings()
+        {
+            DocumentStore documentStore = new DocumentStore(0);
+            documentStore.AddDocument("item");
+            Console.WriteLine(documentStore);
+        }
+
+        public class DocumentStore
+        {
+            private List<string> _documents = new List<string>();
+            private int _capacity;
+
+
+            public DocumentStore(int capacity)
+            {
+                Capacity = capacity;
+            }
+
+            public int Capacity { get { return _capacity; } private set { _capacity = value; } }
+            public List<string> Documents { get { return _documents; } private set { _documents = value; } }
+
+            public void AddDocument(string document)
+            {
+                if ((Documents.Count + 1) > Capacity)
+                    throw new InvalidOperationException();
+
+                Documents.Add(document);
+            }
+
+            public override string ToString()
+            {
+                var count = Documents.Count.ToString();
+                var capacity = Capacity;
+                return $"Document store: " + count + "/" + capacity.ToString();
+            }
         }
     }
 }

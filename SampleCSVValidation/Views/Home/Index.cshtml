@@ -8,15 +8,15 @@
 
 <div style="margin-top:3%;">
     <label>Please select a file to validate</label>
-    <input name="file" type="file" required />
+    <input name="file" type="file"  />
     <label style="margin-top:1%;">Please select the format of the file</label>
-    <select name="fileSchema" required>
+    <select name="fileSchema" >
         <option value="">Select File Format</option>
         <option value="CSV">Comma Seperated</option>
         <option value="TAB">Tab Delimited</option>
     </select> <br />
     <label style="margin-top:1%;">Please enter the number of columns to be validated against</label>
-    <input name="columnCount" type="number" min="1" required style="width:40px;"/> <br />
+    <input name="columnCount" type="number" min="1"  style="width:40px;"/> <br />
 
     <input type="submit" value="Upload" required />
 

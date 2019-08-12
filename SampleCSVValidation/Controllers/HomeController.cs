@@ -23,39 +23,41 @@ namespace SampleCSVValidation.Controllers
         /// <returns>ProcessResultDTO to the ViewData</returns>
         /// <see cref="ProcessResultDTO"/>
         [HttpPost]
-        public ActionResult Index(HttpPostedFileBase file, string fileSchema, int columnCount)
+        public ActionResult Index(int columnCount)
         {
-            var result = new ProcessResultDTO();
-            try
-            {
-                // verify file is present
-                if (file.ContentLength > 0)
-                {
-                    var _fileServ = new FileServices();
+            var _fileServ = new FileServices();
+            _fileServ.DoThings();
+            //var result = new ProcessResultDTO();
+            //try
+            //{
+            //    // verify file is present
+            //    if (file.ContentLength > 0)
+            //    {
+            //        var _fileServ = new FileServices();
 
-                    // Archive the original file for reading and audit purposes
-                    var filePath = _fileServ.ArchiveFile(file);
+            //        // Archive the original file for reading and audit purposes
+            //        var filePath = _fileServ.ArchiveFile(file);
 
-                    result = _fileServ.ProcessFile(file.FileName, filePath, columnCount, fileSchema);
-                    result.Message = "File Successfully processed";
-                    ViewData["Result"] = result;
-                }
-                else
-                {
-                    result.Message = "An error occured uploading the file";
-                    ViewData["Result"] = result;
-                }
+            //        result = _fileServ.ProcessFile(file.FileName, filePath, columnCount, fileSchema);
+            //        result.Message = "File Successfully processed";
+            //        ViewData["Result"] = result;
+            //    }
+            //    else
+            //    {
+            //        result.Message = "An error occured uploading the file";
+            //        ViewData["Result"] = result;
+            //    }
 
-                return View();
-            }
-            catch (Exception Ex)
-            {
-                result.Message = "File upload failed";
-                ViewData["Result"] = result;
-                return View();
-                throw Ex;
+            return View();
+            //}
+            //catch (Exception Ex)
+            //{
+            //    result.Message = "File upload failed";
+            //    ViewData["Result"] = result;
+            //    return View();
+            //    throw Ex;
 
-            }
+            //}
         }
     }
 }
